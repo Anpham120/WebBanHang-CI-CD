@@ -2,7 +2,11 @@
 .gitignore
 **/bin
 **/obj
-**/data
+
+**/*.db
+**/*.db-shm
+**/*.db-wal
+
 .vs
 .idea
 .vscode

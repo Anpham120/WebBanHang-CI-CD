@@ -1,6 +1,11 @@
 **/bin/
 **/obj/
-**/data/
+
+# SQLite database files
+**/*.db
+**/*.db-shm
+**/*.db-wal
+
 .vs/
 .idea/
 .vscode/
