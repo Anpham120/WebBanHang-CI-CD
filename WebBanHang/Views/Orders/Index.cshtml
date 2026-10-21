@@ -4,7 +4,11 @@
 <section class="panel">
 <table><thead><tr><th>Mã</th><th>Sản phẩm</th><th>Số lượng</th><th>Đơn giá</th><th>Thành tiền</th><th>Trạng thái</th><th>Thao tác</th></tr></thead><tbody>
 @foreach (var o in Model) {
-<tr><td>#@o.Id</td><td>@o.Product?.Name</td><td>@o.Quantity</td><td>@o.UnitPrice.ToString("N0") ₫</td><td><strong>@o.Total.ToString("N0") ₫</strong></td>
+<tr><td>#@o.Id</td><td>@o.Product?.Name</td><td>@o.Quantity
+    @if (o.Quantity >= 5)
+    {
+        <span class="pill active">Đơn số lượng lớn</span>
+    }</td><td>@o.UnitPrice.ToString("N0") ₫</td><td><strong>@o.Total.ToString("N0") ₫</strong></td>
 <td><span class="pill @(o.IsCancelled ? "inactive" : "active")">@(o.IsCancelled ? "Đã hủy" : "Đã tạo")</span></td>
 <td>@if (!o.IsCancelled) { <form asp-action="Cancel" asp-route-id="@o.Id" method="post" class="inline" onsubmit="return confirm('Hủy đơn hàng này?')"><button type="submit" class="textbutton danger">Hủy đơn</button></form> }</td>
 </tr>
