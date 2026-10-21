@@ -1,0 +1,9 @@
+@model CreateOrderInput
+@{ ViewData["Title"] = "Tạo đơn hàng"; }
+<div class="pagehead"><h1>Tạo đơn hàng</h1><a asp-action="Index">← Quay lại</a></div>
+<form asp-action="Create" method="post" class="panel formpanel">
+  <p>Chọn sản phẩm, nhập số lượng. Giá được chốt theo giá bán hiện tại và tồn kho sẽ tự trừ.</p>
+  <label asp-for="ProductId"></label><select asp-for="ProductId" asp-items="ViewBag.Products"><option value="0">-- Chọn sản phẩm --</option></select><span asp-validation-for="ProductId" class="validation"></span>
+  <label asp-for="Quantity"></label><input asp-for="Quantity" type="number" min="1" max="100" /><span asp-validation-for="Quantity" class="validation"></span>
+  <div class="actions"><button type="submit" class="button">Tạo đơn</button></div>
+</form>

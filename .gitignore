@@ -1,0 +1,10 @@
+**/bin/
+**/obj/
+**/data/
+.vs/
+.idea/
+.vscode/
+.previous-image
+*.user
+*.suo
+.DS_Store

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>@ViewData["Title"] · WebBanHang</title>
+  <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap nav">
+      <a class="brand" asp-controller="Home" asp-action="Index">▣ WebBanHang <span class="brand-mark">CI/CD Demo</span></a>
+      <nav aria-label="Điều hướng">
+        <a asp-controller="Home" asp-action="Index">Tổng quan</a>
+        <a asp-controller="Products" asp-action="Index">Sản phẩm</a>
+        <a asp-controller="Categories" asp-action="Index">Danh mục</a>
+        <a asp-controller="Orders" asp-action="Index">Đơn hàng</a>
+      </nav>
+    </div>
+  </header>
+  <main class="wrap content">
+    @if (TempData["Message"] is string message) { <div class="notice success">@message</div> }
+    @if (TempData["Error"] is string error) { <div class="notice error">@error</div> }
+    @RenderBody()
+  </main>
+  <footer class="wrap footer">ASP.NET Core 8 · Ubuntu · Jenkins · Docker · GitHub</footer>
+  @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

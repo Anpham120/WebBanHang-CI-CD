@@ -1,0 +1,40 @@
+@model DashboardViewModel
+@{
+    ViewData["Title"] = "Tổng quan";
+}
+<section class="hero">
+  <div>
+    <p class="eyebrow">AUTOMATED DEPLOYMENT / JENKINS</p>
+    <h1>Quản lý bán hàng <span>đơn giản, trực quan.</span></h1>
+    <p>Demo CI/CD với GitHub, Jenkins, Unit Test và Docker trên Ubuntu Server.</p>
+    <div class="actions">
+      <a class="button" asp-controller="Orders" asp-action="Create">+ Tạo đơn hàng</a>
+      <a class="button ghost" asp-controller="Products" asp-action="Create">+ Thêm sản phẩm</a>
+    </div>
+  </div>
+  <div class="version">
+    <div class="status"><span class="dot"></span> DEPLOYMENT ONLINE</div>
+    <div class="versionlabel">BUILD VERSION</div>
+    <div class="versionnumber">v@Model.Version</div>
+    <div class="hint">Thay đổi giao diện, push code và xem version cập nhật sau pipeline.</div>
+  </div>
+</section>
+<section class="metrics">
+  <div class="metric"><span>Sản phẩm</span><strong>@Model.ProductCount</strong></div>
+  <div class="metric"><span>Danh mục</span><strong>@Model.CategoryCount</strong></div>
+  <div class="metric"><span>Đơn hàng đang hiệu lực</span><strong>@Model.OrderCount</strong></div>
+  <div class="metric"><span>Doanh thu</span><strong>@Model.Revenue.ToString("N0") ₫</strong></div>
+</section>
+<section class="panel">
+  <div class="panelhead"><h2>Đơn hàng gần đây</h2><a asp-controller="Orders" asp-action="Index">Xem tất cả →</a></div>
+  @if (!Model.RecentOrders.Any()) { <p class="empty">Chưa có đơn hàng. Hãy tạo đơn đầu tiên để thử hệ thống.</p> }
+  else {
+    <table><thead><tr><th>Mã đơn</th><th>Sản phẩm</th><th>Số lượng</th><th>Tổng tiền</th><th>Trạng thái</th></tr></thead>
+    <tbody>
+    @foreach (var order in Model.RecentOrders) {
+      <tr><td>#@order.Id</td><td>@order.Product?.Name</td><td>@order.Quantity</td><td>@order.Total.ToString("N0") ₫</td>
+      <td><span class="pill @(order.IsCancelled ? "inactive" : "active")">@(order.IsCancelled ? "Đã hủy" : "Đã tạo")</span></td></tr>
+    }
+    </tbody></table>
+  }
+</section>

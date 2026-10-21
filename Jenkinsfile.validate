@@ -1,0 +1,24 @@
+// Safe validation-only job for intentionally broken demo branches.
+// This job NEVER deploys and cannot overwrite the running website.
+pipeline {
+    agent any
+    options { timestamps(); disableConcurrentBuilds(); skipDefaultCheckout(true) }
+    stages {
+        stage('Checkout') {
+            steps { checkout scm }
+        }
+        stage('Restore') {
+            steps { sh 'docker build --target restore -f Dockerfile .' }
+        }
+        stage('Build') {
+            steps { sh 'docker build --target build -f Dockerfile .' }
+        }
+        stage('Test') {
+            steps { sh 'docker build --target test -f Dockerfile .' }
+        }
+    }
+    post {
+        success { echo 'Validation passed. No deployment will occur.' }
+        failure { echo 'Validation failed safely. Production container remains unchanged.' }
+    }
+}

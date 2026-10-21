@@ -1,0 +1,8 @@
+@model Category
+@{ ViewData["Title"] = "Sửa danh mục"; }
+<div class="pagehead"><h1>Sửa danh mục #@Model.Id</h1><a asp-action="Index">← Quay lại</a></div>
+<form asp-action="Edit" asp-route-id="@Model.Id" method="post" class="panel formpanel">
+  <input asp-for="Id" type="hidden" />
+  <label asp-for="Name"></label><input asp-for="Name" /><span asp-validation-for="Name" class="validation"></span>
+  <div class="actions"><button type="submit" class="button">Cập nhật</button></div>
+</form>

@@ -1,0 +1,13 @@
+@model List<Product>
+@{ ViewData["Title"] = "Sản phẩm"; }
+<div class="pagehead"><div><p class="eyebrow">QUẢN LÝ</p><h1>Sản phẩm</h1></div><a class="button" asp-action="Create">+ Thêm sản phẩm</a></div>
+<section class="panel">
+<table><thead><tr><th>ID</th><th>Tên sản phẩm</th><th>Danh mục</th><th>Giá bán</th><th>Tồn kho</th><th>Thao tác</th></tr></thead><tbody>
+@foreach (var p in Model) {
+<tr><td>#@p.Id</td><td><strong>@p.Name</strong></td><td>@p.Category?.Name</td><td>@p.Price.ToString("N0") ₫</td><td>@p.Stock</td><td class="controls">
+  <a asp-action="Edit" asp-route-id="@p.Id">Sửa</a>
+  <form asp-action="Delete" asp-route-id="@p.Id" method="post" class="inline" onsubmit="return confirm('Xóa sản phẩm này?')"><button class="textbutton danger" type="submit">Xóa</button></form>
+</td></tr>
+}
+</tbody></table>
+</section>

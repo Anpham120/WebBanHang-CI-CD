@@ -1,0 +1,11 @@
+.git
+.gitignore
+**/bin
+**/obj
+**/data
+.vs
+.idea
+.vscode
+README.md
+.previous-image
+*.zip

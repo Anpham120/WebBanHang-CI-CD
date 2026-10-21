@@ -1,0 +1,7 @@
+@model Category
+@{ ViewData["Title"] = "Thêm danh mục"; }
+<div class="pagehead"><h1>Thêm danh mục</h1><a asp-action="Index">← Quay lại</a></div>
+<form asp-action="Create" method="post" class="panel formpanel">
+  <label asp-for="Name"></label><input asp-for="Name" placeholder="VD: Phụ kiện máy tính" /><span asp-validation-for="Name" class="validation"></span>
+  <div class="actions"><button type="submit" class="button">Lưu danh mục</button></div>
+</form>
